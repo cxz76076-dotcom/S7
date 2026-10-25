@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>متجر سحلب</title>
+<style>
+:root{
+  --font:"Helvetica Neue",Helvetica,Tahoma,"Geeza Pro",Arial,sans-serif;
+  --ink:#4c566c;
+  --emboss:0 1px 0 rgba(255,255,255,.85);
+}
+html{font-size:clamp(15px,.55vw + 11px,26px)} /* كل المقاسات بوحدة rem فتكبر وتصغر مع الشاشة */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:var(--font);color:var(--ink);
+  background:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(-45deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),
+    radial-gradient(ellipse at 50% 0%,#cfd4dc 0%,#a9b0bc 60%,#8a919e 100%);
+  display:flex;justify-content:center;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+.device{
+  width:100%;max-width:min(100%,75rem);min-height:100vh;position:relative;overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 4px),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.035) 0 1px,transparent 1px 4px),
+    linear-gradient(#e6e8ec,#d3d6dc);
+  box-shadow:0 0 0 1px #5c6370,0 1.2rem 3.5rem rgba(0,0,0,.45);
+}
+.device::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+}
+.status{
+  direction:ltr;height:1.25rem;display:flex;align-items:center;justify-content:space-between;
+  padding:0 .6rem;font-size:.75rem;font-weight:bold;color:#e8e8e8;text-shadow:0 -1px 0 #000;
+  background:linear-gradient(#4a4a4a,#111 50%,#000 51%,#0b0b0b);border-bottom:1px solid #000;
+}
+.bars{letter-spacing:1px}
+.batt{display:inline-block;width:1.4rem;height:.65rem;border:1px solid #bbb;border-radius:2px;position:relative;vertical-align:-1px;margin-left:.25rem}
+.batt i{position:absolute;inset:1px 3px 1px 1px;background:linear-gradient(#e8e8e8,#8a8a8a);border-radius:1px}
+.nav{
+  height:2.75rem;display:flex;align-items:center;justify-content:center;position:relative;
+  background:linear-gradient(#b4c3da 0%,#8fa5c5 49%,#7d96ba 50%,#6f89b0 100%);
+  border-bottom:1px solid #2d3f5e;box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 2px 4px rgba(0,0,0,.35);
+}
+.nav h1{margin:0;font-size:1.3rem;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.55)}
+.navbtn{
+  position:absolute;right:.5rem;top:.5rem;height:1.75rem;padding:0 .75rem;border-radius:5px;font-size:.75rem;font-weight:bold;
+  display:flex;align-items:center;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.5);
+  background:linear-gradient(#8ea4c6,#5e7aa5 50%,#4d6b99 51%,#5a77a3);
+  border:1px solid #2c4166;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 1px 0 rgba(255,255,255,.3);
+}
+main{padding:1.1rem .9rem 1.8rem;position:relative;z-index:1}
+.rec{
+  direction:ltr;display:flex;justify-content:space-between;align-items:center;
+  font:.7rem/1 "Courier New",monospace;color:#6a7080;text-shadow:var(--emboss);margin-bottom:.75rem;
+}
+.rec b{color:#b21b1b;animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.layout{display:grid;grid-template-columns:1fr;gap:1.1rem;align-items:start}
+.card{
+  background:linear-gradient(#fff,#f2f3f5);border:1px solid #8e939c;border-radius:.75rem;
+  box-shadow:0 1px 0 #fff inset,0 3px 8px rgba(0,0,0,.35),0 0 0 4px rgba(255,255,255,.35);
+  padding:.9rem;position:relative;
+}
+.card::before,.card::after{
+  content:"";position:absolute;top:.45rem;width:.55rem;height:.55rem;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,#aeb3bb 55%,#6b717b);box-shadow:0 1px 1px rgba(0,0,0,.4);
+}
+.card::before{right:.45rem}.card::after{left:.45rem}
+.frame{
+  margin:.6rem .25rem 0;padding:.5rem;border-radius:.5rem;
+  background:linear-gradient(#d9dce1,#9aa0aa);border:1px solid #5d636e;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.7),inset 0 -1px 2px rgba(0,0,0,.3);
+}
+.thumb{
+  position:relative;aspect-ratio:16/9;border-radius:4px;overflow:hidden;border:1px solid #000;
+  background:
+    radial-gradient(circle at 70% 30%,#ffe9a8 0 8%,#ffb347 14%,transparent 30%),
+    linear-gradient(#1b3a6b 0%,#3f7bc4 45%,#f6a35a 78%,#c4472f 100%);
+  box-shadow:inset 0 0 22px rgba(0,0,0,.6);
+}
+.thumb .hill{position:absolute;bottom:0;width:70%;height:34%;background:#16213a;border-radius:60% 60% 0 0/100% 100% 0 0}
+.thumb .h1{left:-10%}.thumb .h2{right:-12%;height:44%;background:#0d1426}
+.thumb .play{
+  position:absolute;inset:0;margin:auto;width:3.4rem;height:3.4rem;border-radius:50%;
+  background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.1) 50%,rgba(0,0,0,.25) 51%,rgba(255,255,255,.2));
+  border:2px solid rgba(255,255,255,.9);box-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.thumb .play::after{content:"";position:absolute;top:.95rem;left:1.25rem;border-left:1.1rem solid #fff;border-top:.7rem solid transparent;border-bottom:.7rem solid transparent;filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))}
+.thumb .gloss{position:absolute;inset:0 0 50% 0;background:linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.06));border-radius:0 0 50% 50%/0 0 22% 22%}
+.thumb .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 1px,transparent 1px 3px);mix-blend-mode:multiply}
+.thumb .tag{position:absolute;right:.4rem;bottom:.4rem;direction:ltr;font:.65rem "Courier New",monospace;color:#fff;background:rgba(0,0,0,.55);padding:2px 5px;border-radius:3px}
+.reflect{
+  height:1.6rem;margin:2px .8rem 0;opacity:.35;border-radius:4px;
+  background:linear-gradient(#3f7bc4,transparent);transform:scaleY(-1);filter:blur(1px);
+  -webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent);
+}
+.title{margin:.9rem .25rem .1rem;font-size:1.4rem;font-weight:bold;color:#2b3447;text-shadow:var(--emboss)}
+.sub{margin:0 .25rem .75rem;font-size:.85rem;color:#7a8190;text-shadow:var(--emboss)}
+.price-row{display:flex;align-items:center;justify-content:space-between;margin:0 .25rem}
+.badge{
+  display:inline-block;padding:.2rem .65rem;border-radius:.7rem;font-size:.75rem;font-weight:bold;color:#fff;
+  background:linear-gradient(#8fb4e6,#4a7fc4 50%,#3667ad 51%,#4778bd);border:1px solid #1d3f73;
+  text-shadow:0 -1px 0 rgba(0,0,0,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 2px rgba(0,0,0,.4);
+}
+.price{font-size:1.9rem;font-weight:bold;color:#2b3447;text-shadow:var(--emboss)}
+.price small{font-size:.9rem;color:#6b7384;margin-right:.25rem}
+.side{display:flex;flex-direction:column}
+.group{border:1px solid #9a9fa8;border-radius:.65rem;overflow:hidden;background:#fff;box-shadow:0 1px 0 rgba(255,255,255,.8)}
+.row{display:flex;justify-content:space-between;padding:.75rem .9rem;font-size:.95rem;border-top:1px solid #d3d5da;background:linear-gradient(#fff,#f8f8fa)}
+.row:first-child{border-top:0}
+.row span:first-child{font-weight:bold;color:#2b3447}
+.row span:last-child{color:#385487}
+.desc{
+  margin-top:1.1rem;padding:.9rem 1rem;border:1px solid #9a9fa8;border-radius:.65rem;
+  background:linear-gradient(#fff,#f3f4f7);box-shadow:0 1px 0 rgba(255,255,255,.8),inset 0 1px 0 #fff;
+}
+.desc h3{margin:0 0 .4rem;font-size:1rem;color:#2b3447;text-shadow:var(--emboss)}
+.desc p{margin:0 0 .6rem;font-size:.88rem;line-height:1.8;color:#5a6378}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 .7rem;padding:0;list-style:none}
+.chips li{
+  padding:.18rem .7rem;border-radius:1rem;font-size:.78rem;font-weight:bold;color:#fff;
+  background:linear-gradient(#8fb4e6,#4a7fc4 50%,#3667ad 51%,#4778bd);border:1px solid #1d3f73;
+  text-shadow:0 -1px 0 rgba(0,0,0,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 1px 2px rgba(0,0,0,.35);
+}
+.note{
+  margin:0;padding:.6rem .75rem;border-radius:.5rem;font-size:.82rem;line-height:1.7;color:#4b4320;
+  background:linear-gradient(#fff6c9,#f4e48f);border:1px solid #b9a64a;box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+}
+.cta{
+  display:block;margin:1.4rem 0 0;text-align:center;text-decoration:none;position:relative;overflow:hidden;
+  padding:1rem .9rem;border-radius:.65rem;font-size:1.15rem;font-weight:bold;line-height:1.5;color:#fff;
+  text-shadow:0 -1px 0 rgba(0,0,0,.55);
+  background:linear-gradient(#7fb0f0 0%,#3d82e0 50%,#1763d1 51%,#2f7ae6 100%);
+  border:1px solid #0a3c8c;border-bottom-color:#06296b;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(0,0,0,.2),0 2px 0 #fff,0 4px 8px rgba(0,0,0,.4);
+  transition:filter .08s;
+}
+.cta::before{content:"";position:absolute;inset:0 0 50% 0;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.12));border-radius:9px 9px 0 0}
+.cta span{position:relative}
+.cta:active{filter:brightness(.78);box-shadow:inset 0 3px 6px rgba(0,0,0,.55),0 2px 0 #fff}
+.cta:focus-visible{outline:3px solid #ffd45a;outline-offset:3px}
+.foot{margin-top:1.4rem;text-align:center;font-size:.7rem;line-height:1.8;color:#80869a;text-shadow:var(--emboss)}
+.foot hr{border:0;height:2px;margin:0 2rem .75rem;background:linear-gradient(90deg,transparent,#9aa0ac,transparent);box-shadow:0 1px 0 #fff}
+/* شاشات كبيرة: عمودين والصفحة تتمدد مع الشاشة */
+@media (min-width:56rem){
+  main{padding:2rem 2.2rem 2.5rem}
+  .layout{grid-template-columns:1.25fr 1fr;gap:2rem;align-items:center}
+  .cta{margin-top:1.6rem}
+}
+@media (min-width:75rem){body{padding-top:1.5rem;padding-bottom:1.5rem}.device{min-height:0;border-radius:1.1rem}.status{border-radius:1.1rem 1.1rem 0 0}}
+@media (prefers-reduced-motion:reduce){.rec b{animation:none}}
+</style>
+</head>
+<body>
+<div class="device">
+  <div class="status" aria-hidden="true">
+    <span class="bars">●●●●○ STC</span>
+    <span>9:41 AM</span>
+    <span>100% <span class="batt"><i></i></span></span>
+  </div>
+  <div class="nav">
+    <div class="navbtn" aria-hidden="true">الأرشيف</div>
+    <h1>متجر سحلب</h1>
+  </div>
+
+  <main>
+    <div class="rec" aria-hidden="true"><span>ARCHIVE COPY · 11/2011</span><b>● REC</b></div>
+
+    <div class="layout">
+      <section class="card">
+        <div class="frame">
+          <div class="thumb" role="img" aria-label="معاينة الثمنيل">
+            <div class="hill h1"></div><div class="hill h2"></div>
+            <div class="scan"></div>
+            <div class="play"></div>
+            <div class="gloss"></div>
+            <div class="tag">1280×720</div>
+          </div>
+        </div>
+        <div class="reflect" aria-hidden="true"></div>
+        <h2 class="title">ثمنيل</h2>
+        <p class="sub">ثمنيل رقمي بتصميم احترافي</p>
+        <div class="price-row">
+          <span class="badge">رقمي</span>
+          <span class="price">10<small>ريال سعودي</small></span>
+        </div>
+      </section>
+
+      <div class="side">
+        <div class="group">
+          <div class="row"><span>النوع</span><span>ثمنيل رقمي</span></div>
+          <div class="row"><span>السعر</span><span>10 ر.س</span></div>
+          <div class="row"><span>الطلب</span><span>عبر إنستقرام</span></div>
+        </div>
+
+        <section class="desc">
+          <h3>وصف الثمنيل</h3>
+          <p>ثمنيل لأي منصة، يتصمم بمقاس وشكل يناسب المنصة اللي تنشر عليها، بجودة عالية وتصميم جذاب يلفت الانتباه.</p>
+          <ul class="chips" aria-label="المنصات المدعومة">
+            <li>يوتيوب</li><li>تيك توك</li><li>إنستقرام</li><li>سناب شات</li><li>أي منصة ثانية</li>
+          </ul>
+          <p class="note">عشان يطلع الثمنيل مناسب لك، أرسل وصف الفيديو أو فكرته مع اسم المنصة لما تتواصل معنا.</p>
+        </section>
+
+        <a class="cta" href="https://www.instagram.com/sa7lab_777?mdxt=Z3UwNmF4M2dwMDV3" target="_blank" rel="noopener noreferrer">
+          <span>للتواصل و للشراء تواصل مع هذا الحساب</span>
+        </a>
+
+        <div class="foot">
+          <hr>
+          قطعة أرشيفية مفقودة · Lost Media<br>
+          Designed for the glossy age · 2011
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
